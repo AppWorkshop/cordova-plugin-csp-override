@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="meteor-ios10-csp-fix" version="0.1.0">
-    <name>Meteor 1.4.1 iOS 10 CSP Fix</name>
-    <description>Fixes the iOS 10 issue with websockets: "Refused to connect to wss://mydomain.com/sockjs/.../websocket because it appears in neither the connect-src directive nor the default-src directive of the Content Security Policy"</description>
+        id="cordova-plugin-csp-override" version="1.0.0">
+    <name>Meteor / Cordova override Content Security Policy</name>
+    <description>Allows the override of Content Security Policy for iOS and Android</description>
     <license>MIT</license>
-    <keywords>cordova,meteor,ios,ios10,csp</keywords>
+    <keywords>cordova,meteor,ios,android,csp</keywords>
     <author>Mike Cunneen - The App Workshop</author>
-    <repo>https://github.com/AppWorkshop/meteor-ios10-csp-fix.git</repo>
+    <repo>https://github.com/AppWorkshop/cordova-plugin-csp-override.git</repo>
     <engines>
         <engine name="cordova" version=">=5.4.1" />
         <engine name="cordova-ios" version=">=4.0.0" />
@@ -15,7 +15,5 @@
     </engines>
 
 
-    <platform name="ios">
-        <hook type="after_prepare" src="scripts/afterBuild.js" />     
-    </platform>
+    <hook type="before_prepare" src="scripts/beforePrepare.js" />
 </plugin>

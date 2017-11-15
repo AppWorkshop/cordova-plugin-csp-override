@@ -1,14 +1,35 @@
-# Meteor 1.4.1 Cordova iOS 10 Content Security Policy Web Sockets Fix
+# Cordova Content-Security-Policy Override
 
-That's a mouthful of a title. But it's a really simple little cordova plugin that 
-just rewrites the ```META``` tag in your cordova build's ```platforms/ios/www/index.html```
+Allows the override of Content Security Policy `<meta>` element for cordova apps.
+
+This simple little plugin 
+just rewrites the ```META``` tag in your cordova build's ```www/index.html```
 file.
 
-This fixes an issue with meteor 1.4 (and probably other cordova apps) where iOS 10's content security 
-policy prevents connections via web sockets.
+### Installation
 
-The new content security policy META element will be:
+For cordova:
 
 ```
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: blob: 'unsafe-inline' 'unsafe-eval' ws: wss:;">
+cordova plugin add cordova-plugin-csp-override
+```
+
+For meteor:
+
+```
+meteor add cordova:cordova-plugin-csp-override@1.0.0
+```
+
+### Usage
+
+Just add a preference in your app's `config.xml` , containing the complete string you want your Content-Security-Policy `<meta>` element to be rewritten to (i.e. the attribute value).
+
+```xml
+<preference name="CONTENT_SECURITY_POLICY" value="* * 'self' default-src * data: blob: 'unsafe-inline' 'unsafe-eval' ws: wss: cdvfile: file: ;"/>
+```
+
+Or in meteor's mobile-config.js :
+
+```js
+App.setPreference("CONTENT_SECURITY_POLICY","* * 'self' default-src * data: blob: 'unsafe-inline' 'unsafe-eval' ws: wss: cdvfile: file: ;");
 ```
